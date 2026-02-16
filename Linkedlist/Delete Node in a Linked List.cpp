@@ -1,33 +1,21 @@
-class node{
-    public:
-    int data; 
-    node* next;
-
-    node(int val){
-        data = val;
-        next = NULL;
-    }
-}
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
 class Solution {
 public:
-    void deleteNode(node* &head , int val){
-        if(head ==NULL){
-            return; 
+    void deleteNode(ListNode* node) {
+        ListNode* prev = NULL;
+
+        while(node!=NULL && node->next!=NULL){
+            node->val = node->next->val;
+            prev = node;
+            node = node->next;
         }
-        if(head.data == val){
-            node* temp = head; 
-            head= head.next;
-            delete temp;
-        }
-        node* curr =head;
-        while(curr.next!=NULL && curr.next.data != val){
-            curr = curr.next;
-        }
-        if(curr.next == NULL){
-            cout<<"value out of range";
-        }
-        temp = curr.next;
-        curr.next = temp.next;
-        delete temp ;
+        prev->next = NULL;
     }
 };
