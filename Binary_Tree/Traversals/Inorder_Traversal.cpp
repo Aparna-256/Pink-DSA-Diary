@@ -1,6 +1,9 @@
 /**
  * Definition for a binary tree node.
  */
+
+RECURSIVE APPROACH
+
 struct TreeNode {
     int val;
     TreeNode *left;
@@ -23,3 +26,31 @@ public:
         return ans;
     }
 };
+
+----------------------------------------------------------------------
+
+    
+ITERATIVE APPROACH
+
+    
+vector<int> inorderTraversal(TreeNode* root) {
+    vector<int> res;
+    stack<TreeNode*> st;
+
+    while (root || !st.empty()) {
+        // go to leftmost node
+        while (root) {
+            st.push(root);
+            root = root->left;
+        }
+
+        root = st.top();
+        st.pop();
+
+        res.push_back(root->val);
+
+        root = root->right;
+    }
+
+    return res;
+}
